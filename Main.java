@@ -1,47 +1,44 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    Scanner scanner = new Scanner(System.in);
+public class Main {
+    public static void main(String[] args) {
+        String[] makeoverTypes = {"Bathrooms", "Kitchens", "Garden"};
+        String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN"};
+        int[][] makeovers = {{8, 2, 5}, {7, 4, 5}, {5, 5, 2}, {2, 2, 3}, {7, 7, 9}, {7, 8, 5}};
 
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("HOME MAKEOVER REPORT");
+        System.out.println("----------------------------------------------------------------");
 
-    String[] city = {"Cape Town", "Johannesburg", "Port Elizabeth"};
-    String[] vehicleTypes = {"CAR", "MOTOR BIKE"};
+        System.out.printf("%-16s", "");
+        for (String type : makeoverTypes) {
+            System.out.printf("%-16s", type);
+        }
+        System.out.println();
 
+        for (int i = 0; i < months.length; i++) {
+            System.out.printf("%-16s", months[i]);
+            for (int j = 0; j < makeovers[i].length; j++) {
+                System.out.printf("%-18d", makeovers[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("MONTHLY TOTALS");
+        System.out.println("-------------------------------------------------------------");
 
-    int[][] accidentData = new int[city.length][vehicleTypes.length];
-    for (int i = 0; i < city.length; i++) {
-        System.out.print("Enter the number of car accidents for " + city[i] + ": ");
-        accidentData[i][0] = scanner.nextInt();
+        for (int i = 0; i < months.length; i++) {
+            int monthlyTotals = 0;
+            for (int j = 0; j < makeovers[i].length; j++) {
+                monthlyTotals += makeovers[i][j];
+            }
 
-        System.out.print("Enter the number of motor bike accidents for " + city[i] + ": ");
-        accidentData[i][1] = scanner.nextInt();
-    }
-    System.out.println("\n--------------------------------------------------");
-    System.out.println("ROAD ACCIDENT REPORT");
-    System.out.println("--------------------------------------------------");
-    System.out.printf("%-20s %-12s %-12s%n", "", vehicleTypes[0], vehicleTypes[1]);
-    for (int i = 0; i < city.length; i++) {
-        System.out.printf("%-20s %-12d %-12d%n", city[i], accidentData[i][0], accidentData[i][1]);
-    }
+            String stars = "";
+            if (monthlyTotals >= 15) {
+                stars = "***";
+            }
 
-    System.out.println("--------------------------------------------------");
-    System.out.println("\nROAD ACCIDENT TOTALS FOR EACH CITY");
-    System.out.println("--------------------------------------------------");
-
-    int maxTotal = -1;
-    String cityWithMostAccidents = "";
-
-    for (int i = 0; i < city.length; i++) {
-        int cityTotal = accidentData[i][0] + accidentData[i][1];
-        System.out.printf("%-20s %-10d%n", city[i], cityTotal);
-        if (cityTotal > maxTotal) {
-            maxTotal = cityTotal;
-            cityWithMostAccidents = city[i];
+            System.out.printf("%-8s %-6d %s%n", months[i], monthlyTotals, stars);
         }
     }
-
-    System.out.println("\n--------------------------------------------------");
-    System.out.println("CITY WITH THE MOST VEHICLE ACCIDENTS: " + cityWithMostAccidents);
-    System.out.println("--------------------------------------------------");
 }
-
